@@ -1,3 +1,7 @@
-export default function() {
-  return <div>Hello world</div>
+import Layout from "./Layout";
+
+export default function () {
+	return <Layout>
+
+  </Layout>;
 }
