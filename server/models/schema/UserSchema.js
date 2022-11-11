@@ -1,4 +1,4 @@
-import { v4 } from "uuid";
+const v4 = require("uuid");
 import Boards from "./Boards";
 
 export default mongoose.Schema({

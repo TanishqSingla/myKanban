@@ -1,3 +1,3 @@
-import UserSchema from "./schema/UserSchema";
+const UserSchema = require("./schema/UserSchema");
 
 export default mongoose.model("User", UserSchema);
