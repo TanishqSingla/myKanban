@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
-const { v4 } = require('uuid');
 
-module.exports = mongoose.Schema({
+module.exports = new mongoose.Schema({
     title: String
 });
