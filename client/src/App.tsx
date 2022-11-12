@@ -1,7 +1,18 @@
 import Layout from "./Layout";
 
 export default function () {
-	return <Layout>
+	const submitForm = (e: any) => {
+		e.preventDefault();
+    fetch("http://localhost:4000/user/signup", {method: 'POST'})
+	};
 
-  </Layout>;
+	return (
+		<Layout>
+			<form onSubmit={submitForm}>
+				<input type="email" />
+				<input />
+				<button type="submit">click</button>
+			</form>
+		</Layout>
+	);
 }

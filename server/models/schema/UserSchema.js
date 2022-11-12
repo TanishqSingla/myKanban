@@ -1,16 +1,19 @@
-const v4 = require("uuid");
-import Boards from "./Boards";
+const mongoose = require("mongoose");
+const { v4 } = require("uuid");
+const Boards = require("./Boards");
 
-export default mongoose.Schema({
-	_id: {
-		type: String,
-		default: v4(),
-	},
+module.exports = mongoose.Schema({
 	name: {
 		type: String,
 		required: true,
 	},
 	email: {
+		type: String,
+		required: true,
+		unique: true,
+		lowercase: true,
+	},
+	password: {
 		type: String,
 		required: true,
 	},
