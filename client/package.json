@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "",
   "main": "index.js",
+  "proxy": "http://127.0.0.1:4000",
   "scripts": {
     "dev": "vite dev",
     "test": "echo \"Error: no test specified\" && exit 1"
