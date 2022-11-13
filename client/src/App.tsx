@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Layout from "./Layout";
 
 export default function () {
@@ -8,9 +8,8 @@ export default function () {
 
 	const submitForm = async (e: any) => {
 		e.preventDefault();
-		fetch("http://localhost:4000/user/signup", {
+		fetch("/api/user/signup", {
 			method: "POST",
-			mode: "cors",
 			headers: {
 				"Content-Type": "application/json",
 			},
