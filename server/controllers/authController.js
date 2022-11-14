@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 function createJWT(_id) {
 	return jwt.sign({ _id }, "my secret");
@@ -20,15 +21,29 @@ module.exports.signup = async (req, res) => {
 	}
 };
 
-module.exports.login = (req, res) => {
+module.exports.login = async (req, res) => {
 	const { email, password } = req.body;
-	console.log(email, password);
-	res.status("sign in").json();
+
+	const user = await User.findOne({ email });
+
+	if (user) {
+		const auth = await bcrypt.compare(password, user.password);
+		if (auth) {
+			const token = createJWT(user._id);
+			res.cookie("jwt", token);
+
+			res.status(200).json({ _id: user._id, token });
+		} else {
+			res.status(403).json({ error: "Password doesn't match" });
+		}
+	} else {
+		res.status(400).json({ error: "Email doesn't exist" });
+	}
 };
 
 module.exports.logout = (req, res) => {
-	res.status(202).clearCookie('jwt').send('cleared');
-}
+	res.status(202).clearCookie("jwt").send("cleared");
+};
 
 module.exports.authenticated = (req, res) => {
 	const token = req.cookies?.jwt;
@@ -41,7 +56,7 @@ module.exports.authenticated = (req, res) => {
 			res.json({ isAuthenticated: false });
 			return;
 		} else {
-			res.json({ isAuthenticated: true, _id: user._id});
+			res.json({ isAuthenticated: true, _id: user._id });
 		}
 	});
 };
