@@ -1,8 +1,19 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { FaColumns, FaSignOutAlt } from "react-icons/fa";
+import "./header.css";
 
 export default function () {
-	const user = useContext(AuthContext).state.user;
+	const { state, dispatch } = useContext(AuthContext);
+	const { user } = state;
+
+	const handleLogout = () => {
+		fetch("/api/user/logout")
+			.then(() => {
+				dispatch({ type: "LOGOUT", payload: null });
+			})
+			.catch((e) => console.log(e));
+	};
 
 	return (
 		<>
@@ -10,9 +21,16 @@ export default function () {
 				<header>
 					<nav>
 						<ul>
-							<li></li>
+							<li>
+								<FaColumns color="white" />
+								Boards
+							</li>
 						</ul>
 					</nav>
+					<button onClick={handleLogout}>
+						<FaSignOutAlt color="white" />
+						Sign Out
+					</button>
 				</header>
 			)}
 		</>
