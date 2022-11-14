@@ -26,6 +26,10 @@ module.exports.login = (req, res) => {
 	res.status("sign in").json();
 };
 
+module.exports.logout = (req, res) => {
+	res.status(202).clearCookie('jwt').send('cleared');
+}
+
 module.exports.authenticated = (req, res) => {
 	const token = req.cookies?.jwt;
 	if (!token) {
