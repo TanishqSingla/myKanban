@@ -29,7 +29,10 @@ export default function () {
 						authContext?.state?.user ? <Home /> : <Navigate to="/login" />
 					}
 				/>
-				<Route path="/signup" element={<Signup />} />
+				<Route
+					path="/signup"
+					element={!authContext.state.user ? <Signup /> : <Navigate to="/" />}
+				/>
 				<Route
 					path="/login"
 					element={!authContext?.state?.user ? <Login /> : <Navigate to="/" />}

@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 
 export default function () {
-	const { state, dispatch } = useContext(AuthContext);
+	const { dispatch } = useContext(AuthContext);
 
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -12,9 +12,7 @@ export default function () {
 
 		const response = await fetch("/api/user/login", {
 			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
+			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({ email, password }),
 		});
 
