@@ -23,9 +23,17 @@ export default function () {
 	return (
 		<Layout>
 			<Routes>
-				<Route path="/" element={authContext?.state?.user ? <Home /> : <Navigate to="/login" />} />
+				<Route
+					path="/"
+					element={
+						authContext?.state?.user ? <Home /> : <Navigate to="/login" />
+					}
+				/>
 				<Route path="/signup" element={<Signup />} />
-				<Route path="/login" element={<Login />} />
+				<Route
+					path="/login"
+					element={!authContext?.state?.user ? <Login /> : <Navigate to="/" />}
+				/>
 			</Routes>
 		</Layout>
 	);
