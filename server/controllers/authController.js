@@ -6,6 +6,17 @@ function createJWT(_id, email) {
 	return jwt.sign({ _id, email }, "my secret");
 }
 
+module.exports.getUser = async (req, res) => {
+	const user = User.findOne(req.body.email);
+	if (user) {
+		res
+			.status(200)
+			.json({ _id: user._id, email: user.email, boards: user.boards });
+	} else {
+		res.status(404).json({ error: "User not found" });
+	}
+};
+
 module.exports.signup = async (req, res) => {
 	const { name, email, password } = req.body;
 	try {
@@ -59,10 +70,4 @@ module.exports.authenticated = (req, res) => {
 			res.json({ isAuthenticated: true, _id: user._id, email: user.email });
 		}
 	});
-};
-
-module.exports.getBoards = async (req, res) => {
-	const { email } = req.body;
-	const user = await User.findOne({ email });
-	res.status(200).json({ user });
 };

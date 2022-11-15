@@ -1,13 +1,20 @@
 import { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 export default function () {
-  const [title, setTitle] = useState('');
-  const navigate = useNavigate();
+	const [name, setName] = useState("");
+	const navigate = useNavigate();
 
 	const submitHandler = (e: React.FormEvent) => {
-    e.preventDefault();
+		e.preventDefault();
 
+		fetch("/api/action/createBoard", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ name }),
+		}).then(() => {
+      navigate("/");
+    });
 	};
 
 	return (
@@ -16,12 +23,15 @@ export default function () {
 				<h1>My Kanban</h1>
 				<input
 					type="Enter Title"
-					value={title}
-					onChange={(e) => setTitle(e.target.value)}
+					value={name}
+					onChange={(e) => setName(e.target.value)}
 					placeholder="Enter name"
 					required
 				/>
 				<button type="submit">Submit</button>
+				<span>
+					<Link to="/">Go back</Link>
+				</span>
 			</form>
 		</div>
 	);
