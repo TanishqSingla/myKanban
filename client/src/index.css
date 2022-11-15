@@ -62,16 +62,23 @@ main {
 
 .boards {
   display: flex;
+  gap: 2rem;
   flex-wrap: wrap;
 }
 .card {
-  height: 8rem;
+  height: 4rem;
   width: 16rem;
   border-radius: 4px;
+  color: #4b5054;
+  cursor: pointer;
+  font-weight: bolder;
+  padding: 1rem;
+  background-color: #dde0e5;
 }
 .createBoardCard {
   background-color: #745286;
   display: grid;
   place-items: center;
+  color: white;
   cursor: pointer;
 }

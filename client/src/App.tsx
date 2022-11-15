@@ -6,6 +6,7 @@ import { useContext, useEffect } from "react";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import CreateBoard from "./pages/CreateBoard";
+import Board from "./pages/Board";
 
 export default function () {
 	const authContext = useContext(AuthContext);
@@ -30,7 +31,8 @@ export default function () {
 						authContext?.state?.user ? <Home /> : <Navigate to="/login" />
 					}
 				/>
-				<Route path="/createBoard" element={<CreateBoard />}></Route>
+				<Route path="/createBoard" element={<CreateBoard />} />
+				<Route path="/boards/:id" element={<Board />}/>
 				<Route
 					path="/signup"
 					element={!authContext.state.user ? <Signup /> : <Navigate to="/" />}
