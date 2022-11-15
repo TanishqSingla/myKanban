@@ -6,5 +6,5 @@ module.exports = new mongoose.Schema({
 		type: String,
 		required: true
 	},
-	card: [CardSchema]
+	cards: [CardSchema]
 });
