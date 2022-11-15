@@ -11,24 +11,37 @@ export default function () {
 
 	useEffect(() => {
 		if (!state.user) {
+			console.log("hell")
 			return;
 		}
 		fetch("/api/user/getUser", {
 			method: "POST",
-			headers: {'Content-Type': "application/json"},
-			body: JSON.stringify({email: state.user.email})
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ email: state.user.email }),
 		}).then(async (res) => {
 			const data = await res.json();
 			setBoards(data.boards);
-		})
+		});
 	}, []);
 
 	return (
 		<main>
 			<h1>Boards</h1>
 			<div className="boards">
-				{boards && boards.map((board: any, index: any) => <div key={board._id} className="card" onClick={() => navigate(`/boards/${board._id}`)}>{board.name}</div>)}
-				<div className="card createBoardCard" onClick={() => navigate("/createBoard")}>
+				{boards &&
+					boards.map((board: any, index: any) => (
+						<div
+							key={board._id}
+							className="card"
+							onClick={() => navigate(`/boards/${board._id}`)}
+						>
+							{board.name}
+						</div>
+					))}
+				<div
+					className="card createBoardCard"
+					onClick={() => navigate("/createBoard")}
+				>
 					<AiOutlinePlus />
 				</div>
 			</div>
