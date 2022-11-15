@@ -11,9 +11,9 @@ export default function () {
 
 	useEffect(() => {
 		fetch("/api/user/authenticated").then(async (data) => {
-			const json = await data.json();
-			if (json.isAuthenticated) {
-				authContext?.dispatch({ type: "LOGIN", payload: { _id: json._id } });
+			const user = await data.json();
+			if (user.isAuthenticated) {
+				authContext?.dispatch({ type: "LOGIN", payload: { _id: user._id, email: user.email } });
 			} else {
 				authContext?.dispatch({ type: "LOGOUT", payload: null });
 			}

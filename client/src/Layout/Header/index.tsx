@@ -27,10 +27,13 @@ export default function () {
 							</li>
 						</ul>
 					</nav>
-					<button onClick={handleLogout}>
-						<FaSignOutAlt color="white" />
-						Sign Out
-					</button>
+					<div className="user">
+						<span>{user.email}</span>
+						<button onClick={handleLogout}>
+							<FaSignOutAlt color="white" />
+							Sign Out
+						</button>
+					</div>
 				</header>
 			)}
 		</>

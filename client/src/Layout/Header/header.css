@@ -17,6 +17,15 @@ header ul li {
   padding: .3rem .5rem;
 }
 
+header .user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+header .user span {
+  color: rgba(255, 255, 255, 0.7);
+}
+
 header button {
   height: 2rem;
   border: none;

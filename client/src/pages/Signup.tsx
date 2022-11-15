@@ -20,7 +20,7 @@ export default function () {
 		const data = await response.json();
 
 		if (data._id) {
-			dispatch({ type: "LOGIN", payload: data._id });
+			dispatch({ type: "LOGIN", payload: { _id: data.id, email: data.email } });
 		}
 	};
 

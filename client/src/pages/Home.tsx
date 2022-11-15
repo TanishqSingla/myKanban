@@ -1,3 +1,18 @@
-export default function() {
-  return <div></div>
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../context/AuthContext";
+
+export default function () {
+	const { state } = useContext(AuthContext);
+
+	const [boards, setBoards] = useState([]);
+
+	useEffect(() => {
+		if (!state.user) {
+			return;
+		}
+	}, []);
+
+	return <div>
+    
+  </div>;
 }
