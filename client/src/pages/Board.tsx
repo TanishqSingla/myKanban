@@ -50,14 +50,14 @@ export default function Board() {
   const addCard = (e: React.FormEvent) => {
 		e.preventDefault();
 
-		fetch("/api/action/addCard", {
+		fetch("/api/action/createCard", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ boardId: params.id, listId: currentList._id, cardName}),
+			body: JSON.stringify({ boardId: params.id, listId: currentList, content: cardName}),
 		}).then(async (res) => {
 			updateBoard();
-      setListName('')
-			setVisible(false);
+      setCardName('')
+			setCardModalVisible(false);
 		});
 	}
 
@@ -72,7 +72,7 @@ export default function Board() {
 							<h4>{list.name}</h4>
 							<div className="list-cards">
 								{list.cards.map((card: any) => {
-									<div key={card._id} className="list-card">{card.content}</div>;
+									return <div key={card._id} className="list-card">{card.content}</div>;
 								})}
 								<div className="create-list-card" onClick={() => {setCardModalVisible(true); setCurrentList(list._id)}}>
 									<AiOutlinePlus />
@@ -105,9 +105,9 @@ export default function Board() {
 			<Modal onCancel={() => setCardModalVisible(false)} visible={cardModalVisible}>
 				<form onSubmit={addCard} className="createListForm">
 					<input
-						value={listName}
+						value={cardName}
 						onChange={(e) => setCardName(e.target.value)}
-						placeholder="Enter name"
+						placeholder="Enter content"
 					/>
 					<button type="submit">Submit</button>
 					<button
