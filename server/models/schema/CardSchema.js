@@ -1,6 +1,5 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-module.export = mongoose.Schema({
-	title: String,
-	content: String,
-})
+module.exports = new mongoose.Schema({
+	content: String
+});
