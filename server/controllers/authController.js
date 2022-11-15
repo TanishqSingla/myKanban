@@ -2,8 +2,8 @@ const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
-function createJWT(_id) {
-	return jwt.sign({ _id }, "my secret");
+function createJWT(_id, email) {
+	return jwt.sign({ _id, email }, "my secret");
 }
 
 module.exports.signup = async (req, res) => {
@@ -11,7 +11,7 @@ module.exports.signup = async (req, res) => {
 	try {
 		const user = await User.create({ name, email, password });
 
-		const token = createJWT(user._id);
+		const token = createJWT(user._id, user.email);
 
 		res.cookie("jwt", token);
 		res.json({ user, token });
@@ -29,10 +29,10 @@ module.exports.login = async (req, res) => {
 	if (user) {
 		const auth = await bcrypt.compare(password, user.password);
 		if (auth) {
-			const token = createJWT(user._id);
+			const token = createJWT(user._id, user.email);
 			res.cookie("jwt", token);
 
-			res.status(200).json({ _id: user._id, token });
+			res.status(200).json({ _id: user._id, email: user.email, token });
 		} else {
 			res.status(403).json({ error: "Password doesn't match" });
 		}
@@ -56,7 +56,7 @@ module.exports.authenticated = (req, res) => {
 			res.json({ isAuthenticated: false });
 			return;
 		} else {
-			res.json({ isAuthenticated: true, _id: user._id });
+			res.json({ isAuthenticated: true, _id: user._id, email: user.email });
 		}
 	});
 };
