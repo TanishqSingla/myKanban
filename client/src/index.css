@@ -2,9 +2,60 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  background-color: #89609E;
 }
 
 .root {
   margin: 0;
   padding: 0;
+}
+
+main {
+  max-width: 1440px;
+  margin: 0 auto;
+  color: white;
+}
+
+.auth-form-container {
+  height: 100vh;
+  display: grid;
+  place-items: center;
+}
+.auth-form {
+  width: 24rem;
+  gap: 1rem;
+  display: flex;
+  flex-flow: column;
+}
+.auth-form h1 {
+  text-align: center;
+  color: white;
+}
+.auth-form span {
+  text-align: center;
+  color: white;
+}
+.auth-form span a {
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+}
+.auth-form input {
+  height: 2rem;
+  padding: 1rem;
+  border: none;
+  border-radius: 4px;
+}
+.auth-form button {
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  height: 4rem;
+  color: #fff;
+  border: solid 1px white;
+  background-color: transparent;
+}
+.auth-form button:hover {
+  background-color: white;
+  transition: .3s ease-in;
+  color: #89609E;
 }

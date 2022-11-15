@@ -12,7 +12,7 @@ export default function () {
 		}
 	}, []);
 
-	return <div>
-    
-  </div>;
+	return <main>
+		<h1>Boards</h1>	
+  </main>;
 }

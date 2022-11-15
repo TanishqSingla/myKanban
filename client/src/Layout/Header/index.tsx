@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { FaColumns, FaSignOutAlt } from "react-icons/fa";
 import "./header.css";
+import { Link } from "react-router-dom";
 
 export default function () {
 	const { state, dispatch } = useContext(AuthContext);
@@ -22,8 +23,10 @@ export default function () {
 					<nav>
 						<ul>
 							<li>
-								<FaColumns color="white" />
-								Boards
+								<Link to="/">
+									<FaColumns color="white" />
+									Boards
+								</Link>
 							</li>
 						</ul>
 					</nav>
