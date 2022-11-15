@@ -60,3 +60,9 @@ module.exports.authenticated = (req, res) => {
 		}
 	});
 };
+
+module.exports.getBoards = async (req, res) => {
+	const { email } = req.body;
+	const user = await User.findOne({ email });
+	res.status(200).json({ user });
+};
