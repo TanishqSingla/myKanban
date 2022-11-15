@@ -7,7 +7,7 @@ function createJWT(_id, email) {
 }
 
 module.exports.getUser = async (req, res) => {
-	const user = User.findOne(req.body.email);
+	const user = await User.findOne({email: req.body.email});
 	if (user) {
 		res
 			.status(200)
