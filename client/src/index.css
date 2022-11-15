@@ -11,7 +11,7 @@ body {
 }
 
 main {
-  max-width: 1440px;
+  padding: 2rem 4rem;
   margin: 0 auto;
   color: white;
 }
@@ -81,4 +81,72 @@ main {
   place-items: center;
   color: white;
   cursor: pointer;
+}
+
+.lists {
+  display: flex;
+  gap: 2rem;
+}
+.listContainer {
+  min-width: 18rem;
+  border-radius: 4px;
+  padding: 1rem .5rem;
+  background-color: #dde0e5;
+}
+.listContainer h4{
+  margin: 0;
+  color: #4b5054;
+}
+
+.createList {
+  background-color: #745286;
+  display: grid;
+  place-items: center;
+  min-width: 18rem;
+  height: 4rem;
+  border-radius: 4px;
+}
+.createListForm {
+  display: flex;
+  flex-flow: column;
+  gap: 8px;
+}
+.createListForm > input{
+  border: none;
+  height: 2rem;
+  padding: 1rem;
+  border-radius: 4px;
+}
+.createListForm > button {
+  border: solid 1px #745286;
+  color: #745286;
+  height: 3rem;
+  background-color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: .3 ease-in;
+}
+.createListForm > button:hover {
+  background-color: #745286;
+  color: white;
+}
+
+.list-cards {
+  margin-top: 16px;
+  display: flex;
+  flex-flow: column;
+  gap: 8px;
+}
+.list-card {
+  background: white;
+  color: #4b5054;
+  padding: .5rem;
+  border-radius: 4px;
+}
+
+.create-list-card {
+  background-color: rgba(0, 0, 0, 0.3);
+  text-align: center;
+  border-radius: 4px;
+  padding: .5rem;
 }
