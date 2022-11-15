@@ -59,3 +59,19 @@ main {
   transition: .3s ease-in;
   color: #89609E;
 }
+
+.boards {
+  display: flex;
+  flex-wrap: wrap;
+}
+.card {
+  height: 8rem;
+  width: 16rem;
+  border-radius: 4px;
+}
+.createBoardCard {
+  background-color: #745286;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
