@@ -14,7 +14,7 @@ module.exports.signup = async (req, res) => {
 		const token = createJWT(user._id, user.email);
 
 		res.cookie("jwt", token);
-		res.json({ user, token });
+		res.status(200).json({ _id: user._id, email: user.email, token });
 	} catch (err) {
 		console.log(err);
 		res.status(503).json(err);
