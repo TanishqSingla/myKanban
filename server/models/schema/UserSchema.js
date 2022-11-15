@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-const Boards = require("./Boards");
 const bcrypt = require('bcrypt');
+const BoardSchema = require("./BoardSchema");
 
 const schema = new mongoose.Schema({
 	name: {
@@ -17,7 +17,7 @@ const schema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
-	boards: [Boards],
+	boards: [BoardSchema],
 });
 
 schema.pre('save', async function(next) {
