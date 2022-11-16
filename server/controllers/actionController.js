@@ -67,3 +67,17 @@ module.exports.removeCard = async (req, res) => {
 		res.status(403).josn({ error: "User not authorized" });
 	}
 };
+
+module.exports.removeList = async (req, res) => {
+	if (req.user) {
+		const user = await User.findOne({ email: req.user.email });
+		user.boards
+			.id(req.body.boardId)
+			.lists.id(req.body.listId).remove()
+		const updated = await user.save();
+
+		res.status(200).json({ message: "List removed successfully" });
+	} else {
+		res.status(403).json({ error: "User not authorized" });
+	}
+};

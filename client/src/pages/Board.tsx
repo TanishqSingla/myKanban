@@ -66,7 +66,7 @@ export default function Board() {
 		});
 	};
 
-	const handleRemoveCard = (e: any, list: any, card: any) => {
+	const handleRemoveCard = (list: any, card: any) => {
 		fetch("/api/action/removeCard", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
@@ -80,6 +80,19 @@ export default function Board() {
 		});
 	};
 
+	const handleRemoveList = (list: any) => {
+		fetch("/api/action/removeList", {
+			method: "POST",
+			headers: {"Content-Type": "application/json"},
+			body: JSON.stringify({
+				boardId: params.id,
+				listId: list._id
+			})
+		}).then(() => {
+			updateBoard();
+		});
+	}
+
 	return (
 		<main>
 			<h1>{boardDetails.name}</h1>
@@ -88,7 +101,12 @@ export default function Board() {
 				{boardDetails?.lists &&
 					boardDetails.lists.map((list: any) => (
 						<div key={list._id} className="listContainer">
-							<h4>{list.name}</h4>
+							<div className="listHeader">
+								<h4>{list.name}</h4>
+								<div onClick={() => handleRemoveList(list)} className="delete-list">
+									<FaTrash />
+								</div>
+							</div>
 							<div className="list-cards">
 								{list.cards.map((card: any) => {
 									return (
@@ -96,7 +114,7 @@ export default function Board() {
 											<div className="list-card-content">{card.content}</div>
 											<div
 												className="delete-card"
-												onClick={(e) => handleRemoveCard(e, list, card)}
+												onClick={() => handleRemoveCard(list, card)}
 											>
 												<FaTrash />
 											</div>
@@ -141,13 +159,13 @@ export default function Board() {
 				onCancel={() => setCardModalVisible(false)}
 				visible={cardModalVisible}
 			>
-				<form onSubmit={addCard} className="createListForm">
+				<div className="createListForm">
 					<input
 						value={cardName}
 						onChange={(e) => setCardName(e.target.value)}
 						placeholder="Enter content"
 					/>
-					<button type="submit">Submit</button>
+					<button onClick={addCard}>Submit</button>
 					<button
 						onClick={() => {
 							setListName("");
@@ -156,7 +174,7 @@ export default function Board() {
 					>
 						Cancel
 					</button>
-				</form>
+				</div>
 			</Modal>
 		</main>
 	);

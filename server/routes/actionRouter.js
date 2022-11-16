@@ -8,5 +8,6 @@ router.post("/createBoard", actionController.createBoard);
 router.post("/createList", actionController.createList);
 router.post('/createCard', actionController.createCard);
 router.post('/removeCard', actionController.removeCard);
+router.post('/removeList', actionController.removeList);
 
 module.exports = router;

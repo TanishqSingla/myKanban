@@ -172,3 +172,17 @@ main {
   border-radius: 4px;
   padding: .5rem;
 }
+
+.listHeader {
+  display: flex;
+  justify-content: space-between;
+}
+.delete-list {
+  color: #4b5054;
+  cursor: pointer;
+  display:none;
+}
+.listHeader:hover .delete-list {
+  display: block;
+  color: red; 
+}
