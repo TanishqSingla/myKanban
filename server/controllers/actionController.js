@@ -31,22 +31,39 @@ module.exports.createList = async (req, res) => {
 		user.boards.id(req.body.boardId).lists.push({ name: req.body.listName });
 		const updated = await user.save();
 
-		res
-			.status(200)
-			.json({ message: "List successfully created"});
+		res.status(200).json({ message: "List successfully created" });
 	} else {
 		res.status(403).json({ error: "User not authorized" });
 	}
 };
 
 module.exports.createCard = async (req, res) => {
-  if(req.user) {
-    const user = await User.findOne({email: req.user.email});
-    user.boards.id(req.body.boardId).lists.id(req.body.listId).cards.push({content: req.body.content});
-    const updated = await user.save();
+	if (req.user) {
+		const user = await User.findOne({ email: req.user.email });
+		user.boards
+			.id(req.body.boardId)
+			.lists.id(req.body.listId)
+			.cards.push({ content: req.body.content });
+		const updated = await user.save();
 
-    res.status(200).json({message: "Card succesfully added"})
-  } else {
-    res.status(403).json({error: "User not authorized"});
-  }
-}
+		res.status(200).json({ message: "Card succesfully added" });
+	} else {
+		res.status(403).json({ error: "User not authorized" });
+	}
+};
+
+module.exports.removeCard = async (req, res) => {
+	if (req.user) {
+		const user = await User.findOne({ email: req.user.email });
+		user.boards
+			.id(req.body.boardId)
+			.lists.id(req.body.listId)
+			.cards.id(req.body.cardId)
+			.remove();
+		const updated = await user.save();
+
+		res.status(200).json({ message: "Card removed successfully" });
+	} else {
+		res.status(403).josn({ error: "User not authorized" });
+	}
+};
