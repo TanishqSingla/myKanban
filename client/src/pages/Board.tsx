@@ -120,13 +120,13 @@ export default function Board() {
 				</div>
 			</div>
 			<Modal onCancel={() => setVisible(false)} visible={visible}>
-				<form onSubmit={handleSubmit} className="createListForm">
+				<div className="createListForm">
 					<input
 						value={listName}
 						onChange={(e) => setListName(e.target.value)}
 						placeholder="Enter name"
 					/>
-					<button type="submit">Submit</button>
+					<button onClick={handleSubmit}>Submit</button>
 					<button
 						onClick={() => {
 							setListName("");
@@ -135,7 +135,7 @@ export default function Board() {
 					>
 						Cancel
 					</button>
-				</form>
+				</div>
 			</Modal>
 			<Modal
 				onCancel={() => setCardModalVisible(false)}
