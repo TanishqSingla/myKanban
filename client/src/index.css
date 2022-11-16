@@ -89,6 +89,7 @@ main {
 }
 .listContainer {
   min-width: 18rem;
+  max-width: 18rem;
   border-radius: 4px;
   padding: 1rem .5rem;
   background-color: #dde0e5;
@@ -103,6 +104,7 @@ main {
   display: grid;
   place-items: center;
   min-width: 18rem;
+  max-width: 18rem;
   height: 4rem;
   border-radius: 4px;
 }
@@ -142,9 +144,28 @@ main {
   color: #4b5054;
   padding: .5rem;
   border-radius: 4px;
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.list-card-content {
+  overflow-wrap: break-word;
+  width: 90%;
+}
+.list-card:hover .delete-card {
+  display: block;
+  cursor: pointer;
+}
+.delete-card {
+  transition: .3s ease-in;
+  display: none;
+}
+.delete-card:hover {
+  color: crimson;
 }
 
 .create-list-card {
+  cursor: pointer;
   background-color: rgba(0, 0, 0, 0.3);
   text-align: center;
   border-radius: 4px;

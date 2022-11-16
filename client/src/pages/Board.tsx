@@ -1,5 +1,6 @@
 import { useLayoutEffect, useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
+import { FaTrash } from "react-icons/fa";
 import { useNavigate, useParams } from "react-router-dom";
 import Modal from "../components/UI/Modal";
 
@@ -11,8 +12,8 @@ export default function Board() {
 	const [visible, setVisible] = useState(false);
 	const [cardModalVisible, setCardModalVisible] = useState(false);
 	const [listName, setListName] = useState("");
-  const [cardName, setCardName] = useState('');
-  const [currentList, setCurrentList] = useState();
+	const [cardName, setCardName] = useState("");
+	const [currentList, setCurrentList] = useState();
 
 	useLayoutEffect(() => {
 		updateBoard();
@@ -42,24 +43,42 @@ export default function Board() {
 			body: JSON.stringify({ boardId: params.id, listName }),
 		}).then(async (res) => {
 			updateBoard();
-      setListName('')
+			setListName("");
 			setVisible(false);
 		});
 	};
 
-  const addCard = (e: React.FormEvent) => {
+	const addCard = (e: React.FormEvent) => {
 		e.preventDefault();
 
 		fetch("/api/action/createCard", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ boardId: params.id, listId: currentList, content: cardName}),
+			body: JSON.stringify({
+				boardId: params.id,
+				listId: currentList,
+				content: cardName,
+			}),
 		}).then(async (res) => {
 			updateBoard();
-      setCardName('')
+			setCardName("");
 			setCardModalVisible(false);
 		});
-	}
+	};
+
+	const handleRemoveCard = (e: any, list: any, card: any) => {
+		fetch("/api/action/removeCard", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				boardId: params.id,
+				listId: list._id,
+				cardId: card._id,
+			}),
+		}).then(() => {
+			updateBoard();
+		});
+	};
 
 	return (
 		<main>
@@ -72,9 +91,25 @@ export default function Board() {
 							<h4>{list.name}</h4>
 							<div className="list-cards">
 								{list.cards.map((card: any) => {
-									return <div key={card._id} className="list-card">{card.content}</div>;
+									return (
+										<div key={card._id} className="list-card">
+											<div className="list-card-content">{card.content}</div>
+											<div
+												className="delete-card"
+												onClick={(e) => handleRemoveCard(e, list, card)}
+											>
+												<FaTrash />
+											</div>
+										</div>
+									);
 								})}
-								<div className="create-list-card" onClick={() => {setCardModalVisible(true); setCurrentList(list._id)}}>
+								<div
+									className="create-list-card"
+									onClick={() => {
+										setCardModalVisible(true);
+										setCurrentList(list._id);
+									}}
+								>
 									<AiOutlinePlus />
 								</div>
 							</div>
@@ -102,7 +137,10 @@ export default function Board() {
 					</button>
 				</form>
 			</Modal>
-			<Modal onCancel={() => setCardModalVisible(false)} visible={cardModalVisible}>
+			<Modal
+				onCancel={() => setCardModalVisible(false)}
+				visible={cardModalVisible}
+			>
 				<form onSubmit={addCard} className="createListForm">
 					<input
 						value={cardName}
