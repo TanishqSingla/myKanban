@@ -19,7 +19,7 @@ module.exports.createBoard = async (req, res) => {
 		const user = await User.findOne({ email: req.user.email });
 		user.boards.push({ name: req.body.name });
 		const updatedBoards = await user.save();
-		res.status(200).json({ message: "board created" });
+		res.status(201).json({ message: "board created" });
 	} else {
 		res.status(403).json({ error: "User not authorized" });
 	}
@@ -31,7 +31,7 @@ module.exports.createList = async (req, res) => {
 		user.boards.id(req.body.boardId).lists.push({ name: req.body.listName });
 		const updated = await user.save();
 
-		res.status(200).json({ message: "List successfully created" });
+		res.status(201).json({ message: "List successfully created" });
 	} else {
 		res.status(403).json({ error: "User not authorized" });
 	}
@@ -46,7 +46,7 @@ module.exports.createCard = async (req, res) => {
 			.cards.push({ content: req.body.content });
 		const updated = await user.save();
 
-		res.status(200).json({ message: "Card succesfully added" });
+		res.status(201).json({ message: "Card succesfully added" });
 	} else {
 		res.status(403).json({ error: "User not authorized" });
 	}
