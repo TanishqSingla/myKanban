@@ -68,7 +68,7 @@ export default function Board() {
 
 	const handleRemoveCard = (list: any, card: any) => {
 		fetch("/api/action/removeCard", {
-			method: "POST",
+			method: "DELETE",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({
 				boardId: params.id,
@@ -82,7 +82,7 @@ export default function Board() {
 
 	const handleRemoveList = (list: any) => {
 		fetch("/api/action/removeList", {
-			method: "POST",
+			method: "DELETE",
 			headers: {"Content-Type": "application/json"},
 			body: JSON.stringify({
 				boardId: params.id,
