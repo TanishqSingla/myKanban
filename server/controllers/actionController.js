@@ -62,7 +62,7 @@ module.exports.removeCard = async (req, res) => {
 			.remove();
 		const updated = await user.save();
 
-		res.status(200).json({ message: "Card removed successfully" });
+		res.status(204).json({ message: "Card removed successfully" });
 	} else {
 		res.status(403).josn({ error: "User not authorized" });
 	}
@@ -76,7 +76,7 @@ module.exports.removeList = async (req, res) => {
 			.lists.id(req.body.listId).remove()
 		const updated = await user.save();
 
-		res.status(200).json({ message: "List removed successfully" });
+		res.status(204).json({ message: "List removed successfully" });
 	} else {
 		res.status(403).json({ error: "User not authorized" });
 	}
